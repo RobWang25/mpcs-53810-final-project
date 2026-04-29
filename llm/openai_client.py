@@ -6,7 +6,7 @@ live OpenAI calls.
 
 Usage:
     from llm.openai_client import OpenAIClient
-    client = OpenAIClient(model="gpt-4o", api_key=...)
+    client = OpenAIClient(model="gpt-5-mini", api_key=...)
 """
 
 from __future__ import annotations
@@ -26,7 +26,7 @@ class OpenAIClient(LLMClient):
 
     def __init__(
         self,
-        model: str = "gpt-4o",
+        model: str = "gpt-5-mini",
         api_key: str | None = None,
         max_tokens: int = 50,
         temperature: float = 1.0,

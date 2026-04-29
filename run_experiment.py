@@ -139,7 +139,7 @@ def get_real_llm_factories() -> dict:
     def make_openai_factory(framing: FramingCondition, label: str):
         def factory():
             return LLMStrategy(
-                OpenAIClient(model="gpt-4o"),
+                OpenAIClient(model="gpt-5-mini"),
                 framing,
                 custom_name=label,
             )
@@ -150,9 +150,9 @@ def get_real_llm_factories() -> dict:
         "Claude_Neutral": make_anthropic_factory(FramingCondition.NEUTRAL, "Claude_Neutral"),
         "Claude_Rational": make_anthropic_factory(FramingCondition.RATIONAL, "Claude_Rational"),
         "Claude_Coop": make_anthropic_factory(FramingCondition.COOPERATIVE, "Claude_Coop"),
-        "GPT4o_Neutral": make_openai_factory(FramingCondition.NEUTRAL, "GPT4o_Neutral"),
-        "GPT4o_Rational": make_openai_factory(FramingCondition.RATIONAL, "GPT4o_Rational"),
-        "GPT4o_Coop": make_openai_factory(FramingCondition.COOPERATIVE, "GPT4o_Coop"),
+        "GPT_Neutral": make_openai_factory(FramingCondition.NEUTRAL, "GPT_Neutral"),
+        "GPT_Rational": make_openai_factory(FramingCondition.RATIONAL, "GPT_Rational"),
+        "GPT_Coop": make_openai_factory(FramingCondition.COOPERATIVE, "GPT_Coop"),
     }
 
 
