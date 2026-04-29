@@ -1,0 +1,5 @@
+.env
+ipd_project/.env
+.venv/
+__pycache__/
+data/
