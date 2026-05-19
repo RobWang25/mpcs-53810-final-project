@@ -1,0 +1,6 @@
+numpy
+matplotlib
+nashpy
+axelrod
+anthropic
+openai

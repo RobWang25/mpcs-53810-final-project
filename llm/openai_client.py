@@ -26,9 +26,9 @@ class OpenAIClient(LLMClient):
 
     def __init__(
         self,
-        model: str = "gpt-5-mini",
+        model: str = "gpt-4o",
         api_key: str | None = None,
-        max_tokens: int = 50,
+        max_tokens: int = 150,
         temperature: float = 1.0,
     ) -> None:
         resolved_api_key = api_key or get_env_value("OPENAI_API_KEY")

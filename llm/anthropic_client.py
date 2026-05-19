@@ -30,7 +30,7 @@ class AnthropicClient(LLMClient):
         self,
         model: str = "claude-sonnet-4-6",
         api_key: str | None = None,
-        max_tokens: int = 50,
+        max_tokens: int = 150,
         temperature: float = 1.0,
     ) -> None:
         resolved_api_key = api_key or get_env_value("ANTHROPIC_API_KEY")

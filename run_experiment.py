@@ -139,7 +139,7 @@ def get_real_llm_factories() -> dict:
     def make_openai_factory(framing: FramingCondition, label: str):
         def factory():
             return LLMStrategy(
-                OpenAIClient(model="gpt-5-mini"),
+                OpenAIClient(model="gpt-4o"),
                 framing,
                 custom_name=label,
             )
