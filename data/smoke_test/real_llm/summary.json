@@ -1,0 +1,96 @@
+{
+  "label": "real_llm",
+  "strategy_names": [
+    "TitForTat",
+    "AlwaysDefect",
+    "AlwaysCooperate",
+    "Pavlov",
+    "GrimTrigger",
+    "GenerousTFT",
+    "Claude_Neutral",
+    "Claude_Rational",
+    "Claude_Coop",
+    "GPT_Neutral",
+    "GPT_Rational",
+    "GPT_Coop"
+  ],
+  "ranking": [
+    [
+      "AlwaysDefect",
+      3.236507936507936
+    ],
+    [
+      "GPT_Coop",
+      2.8142361111111107
+    ],
+    [
+      "GrimTrigger",
+      2.8134920634920633
+    ],
+    [
+      "Claude_Neutral",
+      2.8020833333333335
+    ],
+    [
+      "GenerousTFT",
+      2.7944444444444443
+    ],
+    [
+      "GPT_Neutral",
+      2.784722222222222
+    ],
+    [
+      "Pavlov",
+      2.7836257309941517
+    ],
+    [
+      "Claude_Rational",
+      2.783333333333333
+    ],
+    [
+      "GPT_Rational",
+      2.777777777777778
+    ],
+    [
+      "Claude_Coop",
+      2.7708333333333335
+    ],
+    [
+      "TitForTat",
+      2.75
+    ],
+    [
+      "AlwaysCooperate",
+      2.75
+    ]
+  ],
+  "final_distribution": {
+    "TitForTat": -7.229708837249464e-17,
+    "AlwaysDefect": 0.9999999999615958,
+    "AlwaysCooperate": -7.229708874539339e-17,
+    "Pavlov": 8.569497320333351e-23,
+    "GrimTrigger": -3.889562087439602e-14,
+    "GenerousTFT": -1.2470736794292054e-20,
+    "Claude_Neutral": -3.796233867066279e-18,
+    "Claude_Rational": 6.587056639628202e-23,
+    "Claude_Coop": 3.3811127923081426e-23,
+    "GPT_Neutral": 1.848297945832707e-22,
+    "GPT_Rational": 1.130636631581324e-22,
+    "GPT_Coop": -6.538821306847916e-14
+  },
+  "ess_summary": {
+    "TitForTat": true,
+    "AlwaysDefect": true,
+    "AlwaysCooperate": false,
+    "Pavlov": false,
+    "GrimTrigger": false,
+    "GenerousTFT": false,
+    "Claude_Neutral": false,
+    "Claude_Rational": true,
+    "Claude_Coop": false,
+    "GPT_Neutral": true,
+    "GPT_Rational": false,
+    "GPT_Coop": false
+  },
+  "output_dir": "data/smoke_test/real_llm"
+}

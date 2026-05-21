@@ -1,0 +1,190 @@
+{
+  "label": "real_llm",
+  "strategy_names": [
+    "TitForTat",
+    "AlwaysDefect",
+    "AlwaysCooperate",
+    "Pavlov",
+    "GrimTrigger",
+    "GenerousTFT",
+    "Joss",
+    "SuspiciousTFT",
+    "Tester",
+    "Claude_Neutral",
+    "Claude_Rational",
+    "Claude_Coop",
+    "GPT_Neutral",
+    "GPT_Rational",
+    "GPT_Coop"
+  ],
+  "ranking": [
+    [
+      "Claude_Neutral",
+      2.7564292803970223
+    ],
+    [
+      "GenerousTFT",
+      2.749501147213791
+    ],
+    [
+      "GPT_Coop",
+      2.748772522429594
+    ],
+    [
+      "Claude_Coop",
+      2.7073123302961033
+    ],
+    [
+      "TitForTat",
+      2.702638753350803
+    ],
+    [
+      "Claude_Rational",
+      2.6552209111837595
+    ],
+    [
+      "GPT_Neutral",
+      2.6426946224482903
+    ],
+    [
+      "GrimTrigger",
+      2.6404548717155154
+    ],
+    [
+      "AlwaysCooperate",
+      2.6309570079043767
+    ],
+    [
+      "Pavlov",
+      2.628414814814815
+    ],
+    [
+      "Joss",
+      2.6035805383981985
+    ],
+    [
+      "GPT_Rational",
+      2.564041960963014
+    ],
+    [
+      "Tester",
+      2.5599145893387236
+    ],
+    [
+      "SuspiciousTFT",
+      2.50268035548173
+    ],
+    [
+      "AlwaysDefect",
+      2.373178421802908
+    ]
+  ],
+  "final_distribution": {
+    "TitForTat": 2.7320289562815825e-09,
+    "AlwaysDefect": 1.1279285250188275e-20,
+    "AlwaysCooperate": -4.713654843956837e-19,
+    "Pavlov": -1.4195579942240872e-18,
+    "GrimTrigger": 8.379775933429545e-17,
+    "GenerousTFT": -2.1489411800511526e-14,
+    "Joss": 1.6287783643804517e-18,
+    "SuspiciousTFT": -2.8405978432625553e-17,
+    "Tester": 0.5285512536534085,
+    "Claude_Neutral": -2.459157242678543e-12,
+    "Claude_Rational": 1.291527592769817e-16,
+    "Claude_Coop": 1.2061063881123105e-16,
+    "GPT_Neutral": 2.175774887222365e-19,
+    "GPT_Rational": 1.625176327587987e-19,
+    "GPT_Coop": 0.47144874312506746
+  },
+  "ess_summary": {
+    "TitForTat": false,
+    "AlwaysDefect": true,
+    "AlwaysCooperate": false,
+    "Pavlov": false,
+    "GrimTrigger": true,
+    "GenerousTFT": false,
+    "Joss": false,
+    "SuspiciousTFT": false,
+    "Tester": false,
+    "Claude_Neutral": false,
+    "Claude_Rational": false,
+    "Claude_Coop": true,
+    "GPT_Neutral": true,
+    "GPT_Rational": false,
+    "GPT_Coop": false
+  },
+  "output_dir": "data/final_run/real_llm",
+  "llm_stats": {
+    "Claude_Coop": {
+      "total_calls": 1555,
+      "parse_failures": 2,
+      "api_failures": 0,
+      "unparseable_responses": 2,
+      "parse_failure_rate": 0.0012861736334405145,
+      "total_input_tokens": 820051,
+      "total_output_tokens": 22118
+    },
+    "Claude_Neutral": {
+      "total_calls": 1188,
+      "parse_failures": 1,
+      "api_failures": 0,
+      "unparseable_responses": 1,
+      "parse_failure_rate": 0.0008417508417508417,
+      "total_input_tokens": 552612,
+      "total_output_tokens": 11145
+    },
+    "Claude_Rational": {
+      "total_calls": 1391,
+      "parse_failures": 0,
+      "api_failures": 0,
+      "unparseable_responses": 0,
+      "parse_failure_rate": 0.0,
+      "total_input_tokens": 683555,
+      "total_output_tokens": 15276
+    },
+    "GPT_Coop": {
+      "total_calls": 1465,
+      "parse_failures": 1,
+      "api_failures": 0,
+      "unparseable_responses": 1,
+      "parse_failure_rate": 0.0006825938566552901,
+      "total_input_tokens": 732527,
+      "total_output_tokens": 4242
+    },
+    "GPT_Neutral": {
+      "total_calls": 1663,
+      "parse_failures": 0,
+      "api_failures": 0,
+      "unparseable_responses": 0,
+      "parse_failure_rate": 0.0,
+      "total_input_tokens": 802106,
+      "total_output_tokens": 4566
+    },
+    "GPT_Rational": {
+      "total_calls": 1431,
+      "parse_failures": 0,
+      "api_failures": 0,
+      "unparseable_responses": 0,
+      "parse_failure_rate": 0.0,
+      "total_input_tokens": 692471,
+      "total_output_tokens": 4050
+    }
+  },
+  "moran_fixation_probabilities": {
+    "TitForTat": 0.06,
+    "AlwaysDefect": 0.04,
+    "AlwaysCooperate": 0.04,
+    "Pavlov": 0.08,
+    "GrimTrigger": 0.16,
+    "GenerousTFT": 0.08,
+    "Joss": 0.0,
+    "SuspiciousTFT": 0.0,
+    "Tester": 0.06,
+    "Claude_Neutral": 0.06,
+    "Claude_Rational": 0.1,
+    "Claude_Coop": 0.04,
+    "GPT_Neutral": 0.12,
+    "GPT_Rational": 0.04,
+    "GPT_Coop": 0.12
+  }
+}

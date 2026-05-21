@@ -5,11 +5,11 @@ Runs the full pipeline for a given experimental configuration:
   1. Round-robin tournament
   2. Compute behavioral fingerprints for each strategy
   3. Replicator dynamics from uniform initial distribution
-  4. ESS invasion tests for each strategy
-  5. Save data + plots
-
-Used both for the validation run (classical strategies only) and for the
-real experiment (LLMs + classical).
+  4. Replicator-mutation dynamics (robustness check)
+  5. Moran process (finite-population robustness check)
+  6. ESS invasion tests for each strategy
+  7. Aggregate LLM API call stats (parse failure audit)
+  8. Save data + plots
 
 Usage:
     python -m run_experiment --mode classical
@@ -22,6 +22,7 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+from collections import defaultdict
 from pathlib import Path
 
 import numpy as np
@@ -67,12 +68,19 @@ from utils.plotting import (
 logger = logging.getLogger(__name__)
 
 
+# Module-level registry that captures every LLMStrategy instance created
+# during the run, so we can aggregate parse-failure stats at the end.
+# Reset each time main() runs.
+_LLM_INSTANCE_REGISTRY: list[LLMStrategy] = []
+
+
 def get_classical_factories() -> dict:
     """
     Return the standard set of classical strategy factories.
 
-    Uses axelrod-python's canonical implementations by default. Each
-    factory returns a fresh axelrod.Player instance.
+    Uses axelrod-python's canonical implementations. Each factory returns
+    a fresh axelrod.Player instance. Includes 9 strategies — the original
+    6 plus Joss, SuspiciousTFT, and Tester for strategic diversity.
     """
     return dict(AXELROD_CLASSICAL_FACTORIES)
 
@@ -97,53 +105,67 @@ def get_mock_llm_factories() -> dict:
             client = MockLLMClient(
                 coop_probability=coop_prob, model_id=f"mock-{name}"
             )
-            return LLMStrategy(client, framing, custom_name=name)
+            strat = LLMStrategy(client, framing, custom_name=name)
+            _LLM_INSTANCE_REGISTRY.append(strat)
+            return strat
 
         return factory
 
     return {
-        # Three "Claude-like" mocks — high cooperation, varies by framing
         "MockClaude_Neutral": make_factory(0.85, FramingCondition.NEUTRAL, "MockClaude_Neutral"),
         "MockClaude_Rational": make_factory(0.65, FramingCondition.RATIONAL, "MockClaude_Rational"),
         "MockClaude_Coop": make_factory(0.92, FramingCondition.COOPERATIVE, "MockClaude_Coop"),
-        # Three "GPT-like" mocks — moderate cooperation, more responsive to framing
         "MockGPT_Neutral": make_factory(0.70, FramingCondition.NEUTRAL, "MockGPT_Neutral"),
         "MockGPT_Rational": make_factory(0.45, FramingCondition.RATIONAL, "MockGPT_Rational"),
         "MockGPT_Coop": make_factory(0.85, FramingCondition.COOPERATIVE, "MockGPT_Coop"),
     }
 
 
-def get_real_llm_factories() -> dict:
+def get_real_llm_factories(openai_throttle_seconds: float = 3.0) -> dict:
     """
     Return real LLM factories using actual API clients.
 
-    NOTE: Requires ANTHROPIC_API_KEY and OPENAI_API_KEY environment variables.
-    Each tournament call costs real money — see budget estimate in proposal.
+    Each LLMStrategy created is appended to _LLM_INSTANCE_REGISTRY so we
+    can audit parse-failure rates at the end of the run.
+
+    Args:
+        openai_throttle_seconds: minimum seconds between OpenAI calls.
+            Default 3.0 stays safely under Tier 0 (30K TPM) rate limit.
+            Set to 0 if you're on Tier 1+.
+
+    NOTE: Requires ANTHROPIC_API_KEY and OPENAI_API_KEY env vars (or
+    set in ipd_project/.env).
     """
     from llm.anthropic_client import AnthropicClient
     from llm.openai_client import OpenAIClient
 
+    def _register(strategy: LLMStrategy) -> LLMStrategy:
+        _LLM_INSTANCE_REGISTRY.append(strategy)
+        return strategy
+
     def make_anthropic_factory(framing: FramingCondition, label: str):
         def factory():
-            # Note: each LLMStrategy creates a fresh client, so we share one.
-            # In practice we share the *client* but make a fresh strategy.
-            # The client itself is stateless, so this is safe.
-            return LLMStrategy(
-                AnthropicClient(model="claude-sonnet-4-6"),
-                framing,
-                custom_name=label,
+            return _register(
+                LLMStrategy(
+                    AnthropicClient(model="claude-sonnet-4-6"),
+                    framing,
+                    custom_name=label,
+                )
             )
-
         return factory
 
     def make_openai_factory(framing: FramingCondition, label: str):
         def factory():
-            return LLMStrategy(
-                OpenAIClient(model="gpt-4o"),
-                framing,
-                custom_name=label,
+            return _register(
+                LLMStrategy(
+                    OpenAIClient(
+                        model="gpt-4o",
+                        min_seconds_between_calls=openai_throttle_seconds,
+                    ),
+                    framing,
+                    custom_name=label,
+                )
             )
-
         return factory
 
     return {
@@ -154,6 +176,94 @@ def get_real_llm_factories() -> dict:
         "GPT_Rational": make_openai_factory(FramingCondition.RATIONAL, "GPT_Rational"),
         "GPT_Coop": make_openai_factory(FramingCondition.COOPERATIVE, "GPT_Coop"),
     }
+
+
+def report_llm_stats(output_dir: Path) -> dict:
+    """
+    Aggregate parse-failure and API call stats across all LLM strategies
+    created during this run. Print a summary table and save to JSON.
+
+    Looks at _LLM_INSTANCE_REGISTRY, which is populated whenever
+    get_real_llm_factories or get_mock_llm_factories produces a factory
+    that's then called by the tournament.
+    """
+    output_dir = Path(output_dir)
+
+    if not _LLM_INSTANCE_REGISTRY:
+        print("\nNo LLM strategies were recorded — skipping stats report.")
+        return {}
+
+    # Aggregate by strategy name (multiple instances per strategy can exist
+    # — one per match — so we sum stats across them).
+    by_name = defaultdict(lambda: {
+        "total_calls": 0,
+        "parse_failures": 0,
+        "api_failures": 0,
+        "unparseable_responses": 0,
+        "total_input_tokens": 0,
+        "total_output_tokens": 0,
+        "n_instances": 0,
+    })
+
+    for strat in _LLM_INSTANCE_REGISTRY:
+        agg = by_name[strat.name]
+        s = strat.stats()
+        agg["total_calls"] += s["total_calls"]
+        agg["parse_failures"] += s["parse_failures"]
+        agg["api_failures"] += s.get("api_failures", 0)
+        agg["unparseable_responses"] += s.get("unparseable_responses", 0)
+        agg["total_input_tokens"] += s["total_input_tokens"]
+        agg["total_output_tokens"] += s["total_output_tokens"]
+        agg["n_instances"] += 1
+
+    print("\n" + "=" * 90)
+    print("LLM API call statistics by strategy")
+    print("=" * 90)
+    print(
+        f"{'Strategy':<22} {'Calls':>8} {'Fail':>6} {'API err':>8} "
+        f"{'Parse err':>10} {'Fail%':>7} {'In tokens':>11} {'Out tokens':>11}"
+    )
+    print("-" * 90)
+
+    report = {}
+    any_failures = False
+    for name in sorted(by_name.keys()):
+        agg = by_name[name]
+        calls = agg["total_calls"]
+        fails = agg["parse_failures"]
+        rate = fails / calls if calls > 0 else 0.0
+        if rate > 0.02:
+            any_failures = True
+        print(
+            f"{name:<22} {calls:>8} {fails:>6} {agg['api_failures']:>8} "
+            f"{agg['unparseable_responses']:>10} {rate*100:>6.2f}% "
+            f"{agg['total_input_tokens']:>11} {agg['total_output_tokens']:>11}"
+        )
+        report[name] = {
+            "total_calls": calls,
+            "parse_failures": fails,
+            "api_failures": agg["api_failures"],
+            "unparseable_responses": agg["unparseable_responses"],
+            "parse_failure_rate": rate,
+            "total_input_tokens": agg["total_input_tokens"],
+            "total_output_tokens": agg["total_output_tokens"],
+        }
+
+    print("-" * 90)
+    if any_failures:
+        print(
+            "\n  ⚠️  WARNING: One or more strategies had >2% parse failures.\n"
+            "  Data may be biased toward the fallback action (COOPERATE).\n"
+            "  Consider raising rate limit slack or upgrading API tier."
+        )
+    else:
+        print("\n  ✓ All strategies under 2% parse failure rate — data is clean.")
+
+    stats_path = output_dir / "llm_api_stats.json"
+    with open(stats_path, "w") as f:
+        json.dump(report, f, indent=2)
+    print(f"\nSaved LLM stats to {stats_path}")
+    return report
 
 
 def run_experiment(
@@ -174,14 +284,10 @@ def run_experiment(
     Run the full experimental pipeline.
 
     Args:
-        backend: 'axelrod' (default, uses axelrod-python) or 'custom'
-                 (uses our hand-rolled tournament).
+        backend: 'axelrod' (default) or 'custom' tournament implementation.
         mutation_rate: rate for replicator-mutation analysis. Set 0 to skip.
-        n_moran_runs: number of Moran process runs for stochastic analysis.
-                      Set 0 to skip.
+        n_moran_runs: number of Moran process runs. Set 0 to skip.
         moran_population_size: total population size for Moran process.
-
-    Returns a dict with key findings + paths to saved artifacts.
     """
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -232,7 +338,6 @@ def run_experiment(
     for name, fp in fingerprints.items():
         print(f"  {name:<24} {fp}")
 
-    # Save fingerprints to JSON
     fp_dict = {name: fp.to_dict() for name, fp in fingerprints.items()}
     with open(output_dir / "fingerprints.json", "w") as f:
         json.dump(fp_dict, f, indent=2)
@@ -298,11 +403,9 @@ def run_experiment(
     if n_moran_runs > 0:
         print(f"\nRunning {n_moran_runs} Moran processes "
               f"(pop size {moran_population_size})...")
-        # Distribute population uniformly across strategies
         per_strategy = moran_population_size // n
         remainder = moran_population_size - per_strategy * n
         initial_pop = {name: per_strategy for name in result.strategy_names}
-        # Add remainder to first strategies for total = moran_population_size
         for i in range(remainder):
             initial_pop[result.strategy_names[i]] += 1
 
@@ -353,7 +456,10 @@ def run_experiment(
     with open(output_dir / "ess_results.json", "w") as f:
         json.dump(ess_summary, f, indent=2)
 
-    # 5. Done
+    # 5. LLM API call audit
+    llm_stats = report_llm_stats(output_dir)
+
+    # 6. Summary
     summary = {
         "label": label,
         "strategy_names": result.strategy_names,
@@ -361,7 +467,10 @@ def run_experiment(
         "final_distribution": trajectory.final_distribution,
         "ess_summary": {k: v["is_global_ess"] for k, v in ess_summary.items()},
         "output_dir": str(output_dir),
+        "llm_stats": llm_stats,
     }
+    if moran_summary is not None:
+        summary["moran_fixation_probabilities"] = moran_summary
 
     with open(output_dir / "summary.json", "w") as f:
         json.dump(summary, f, indent=2)
@@ -371,6 +480,10 @@ def run_experiment(
 
 
 def main():
+    # Reset the LLM registry at the start of each run so prior-run instances
+    # don't get included in this run's stats.
+    _LLM_INSTANCE_REGISTRY.clear()
+
     parser = argparse.ArgumentParser(description="Run IPD evolutionary game theory experiment")
     parser.add_argument(
         "--mode",
@@ -408,6 +521,13 @@ def main():
         default=50,
         help="Population size for Moran process",
     )
+    parser.add_argument(
+        "--openai-throttle",
+        type=float,
+        default=3.0,
+        help="Seconds between OpenAI calls. 3.0 for Tier 0 (30K TPM), "
+             "0 for Tier 1+ (500K TPM). Only used in real_llm mode.",
+    )
     args = parser.parse_args()
 
     logging.basicConfig(level=logging.INFO, format="%(message)s")
@@ -422,7 +542,10 @@ def main():
         factories = {**get_classical_factories(), **get_mock_llm_factories()}
         label = "mixed_mock"
     elif args.mode == "real_llm":
-        factories = {**get_classical_factories(), **get_real_llm_factories()}
+        factories = {
+            **get_classical_factories(),
+            **get_real_llm_factories(openai_throttle_seconds=args.openai_throttle),
+        }
         label = "real_llm"
     else:
         raise ValueError(f"Unknown mode: {args.mode}")

@@ -5,6 +5,17 @@ This lets us delegate the classical strategy implementations to axelrod
 (canonical, peer-reviewed) while keeping our LLM strategies in our own
 codebase. Our strategies are converted into axelrod.Player subclasses
 on the fly, so they can be used in any axelrod tournament.
+
+Updated to include 3 additional defection-capable strategies that produce
+more strategic diversity than the original 6:
+  - Joss (FirstByJoss): TFT but defects ~10% randomly
+  - SuspiciousTFT: like TFT but defects on the first move
+  - Tester (SecondByTester): probes opponent for exploitability
+
+These were added because in the original smoke test only the AlwaysDefect
+column of the payoff matrix exhibited any variation — every other strategy
+fully cooperated with every non-AD opponent. Adding defection-capable
+strategies creates meaningful evolutionary pressure across more columns.
 """
 
 from __future__ import annotations
@@ -51,29 +62,16 @@ def build_game_history_from_axl(
 
 
 def wrap_as_axelrod_player(strategy: Strategy) -> axl.Player:
-    """
-    Wrap one of our `Strategy` instances as an axelrod `Player`.
-
-    The returned object is a fresh axelrod Player that delegates each
-    decision to the underlying Strategy. This lets us put our LLM
-    strategies into axelrod tournaments alongside their built-in classical
-    strategies.
-
-    Note: this creates a *single* Player instance bound to a *single*
-    underlying Strategy. If you need multiple matches, create a new
-    wrapper per match (or use `make_axelrod_player_class` for a factory).
-    """
+    """Wrap one of our `Strategy` instances as an axelrod `Player`."""
     return _make_axl_player(strategy)
 
 
 def _make_axl_player(strategy: Strategy) -> axl.Player:
     """Create an axelrod.Player that delegates to our Strategy."""
-    # Capture in closure variables that the methods can pick up.
     captured_strategy = strategy
     captured_name = strategy.name
 
     class WrappedPlayer(axl.Player):
-        # axelrod requires a name and classifier on each Player class
         classifier = {
             "memory_depth": float("inf"),
             "stochastic": True,  # Conservative — we don't know about LLMs
@@ -107,12 +105,7 @@ def _make_axl_player(strategy: Strategy) -> axl.Player:
 
 
 def make_axelrod_player_factory(strategy_factory):
-    """
-    Wrap a strategy *factory* (callable returning fresh strategies) as
-    a callable returning fresh axelrod Players.
-
-    Use this when you need multiple instances (e.g. across tournament reps).
-    """
+    """Wrap a strategy factory as a callable returning fresh axelrod Players."""
 
     def factory():
         strategy = strategy_factory()
@@ -121,13 +114,19 @@ def make_axelrod_player_factory(strategy_factory):
     return factory
 
 
-# A standard set of axelrod's built-in classical strategies, matching our
-# previous lineup. These are *factories* — each call returns a fresh instance.
+# Expanded set of classical strategies for the tournament.
+# Six original strategies + three additional defection-capable variants
+# that create meaningful strategic differentiation across the tournament.
 AXELROD_CLASSICAL_FACTORIES: dict[str, callable] = {
+    # --- Original 6 ---
     "TitForTat": axl.TitForTat,
     "AlwaysDefect": axl.Defector,
     "AlwaysCooperate": axl.Cooperator,
     "Pavlov": axl.WinStayLoseShift,
     "GrimTrigger": axl.Grudger,  # axelrod calls Grim Trigger 'Grudger'
     "GenerousTFT": lambda: axl.GTFT(),  # axelrod calls Generous TFT 'GTFT'
+    # --- New 3: defection-capable variants for strategic diversity ---
+    "Joss": axl.FirstByJoss,              # TFT but defects ~10% randomly
+    "SuspiciousTFT": axl.SuspiciousTitForTat,  # TFT but defects first move
+    "Tester": axl.SecondByTester,         # Probes opponent for exploitability
 }

@@ -1,0 +1,17 @@
+{
+  "TitForTat": 0.0,
+  "AlwaysDefect": 0.0,
+  "AlwaysCooperate": 0.0,
+  "Pavlov": 0.0,
+  "GrimTrigger": 0.0,
+  "GenerousTFT": 0.6,
+  "Joss": 0.0,
+  "SuspiciousTFT": 0.0,
+  "Tester": 0.0,
+  "Claude_Neutral": 0.2,
+  "Claude_Rational": 0.0,
+  "Claude_Coop": 0.0,
+  "GPT_Neutral": 0.0,
+  "GPT_Rational": 0.0,
+  "GPT_Coop": 0.2
+}

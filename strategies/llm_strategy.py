@@ -43,11 +43,16 @@ class LLMStrategy(Strategy):
         self.template = get_template(framing)
         self.fallback_action = fallback_action
 
-        # Tracking
+        # Tracking — cumulative across all calls, not reset between games.
+        # This is critical for the end-of-run parse failure audit.
         self.parse_failures = 0
         self.total_calls = 0
         self.total_input_tokens = 0
         self.total_output_tokens = 0
+        # Distinguish API failures (rate limit, network, etc) from cases where
+        # the call succeeded but the response was unparseable.
+        self.api_failures = 0
+        self.unparseable_responses = 0
 
         # Reasoning logs — useful for qualitative analysis later
         self.reasoning_logs: list[str] = []
@@ -66,6 +71,7 @@ class LLMStrategy(Strategy):
         except Exception as e:
             logger.warning(f"LLM call failed: {e}. Using fallback action.")
             self.parse_failures += 1
+            self.api_failures += 1
             return self.fallback_action
 
         self.total_input_tokens += response.input_tokens
@@ -82,6 +88,7 @@ class LLMStrategy(Strategy):
             f"Could not parse action from response: {response.text!r}. Using fallback."
         )
         self.parse_failures += 1
+        self.unparseable_responses += 1
         return self.fallback_action
 
     def reset(self) -> None:
@@ -93,6 +100,8 @@ class LLMStrategy(Strategy):
         return {
             "total_calls": self.total_calls,
             "parse_failures": self.parse_failures,
+            "api_failures": self.api_failures,
+            "unparseable_responses": self.unparseable_responses,
             "parse_failure_rate": (
                 self.parse_failures / self.total_calls if self.total_calls else 0.0
             ),

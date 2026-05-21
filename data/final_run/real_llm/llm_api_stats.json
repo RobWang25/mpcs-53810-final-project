@@ -1,0 +1,56 @@
+{
+  "Claude_Coop": {
+    "total_calls": 1555,
+    "parse_failures": 2,
+    "api_failures": 0,
+    "unparseable_responses": 2,
+    "parse_failure_rate": 0.0012861736334405145,
+    "total_input_tokens": 820051,
+    "total_output_tokens": 22118
+  },
+  "Claude_Neutral": {
+    "total_calls": 1188,
+    "parse_failures": 1,
+    "api_failures": 0,
+    "unparseable_responses": 1,
+    "parse_failure_rate": 0.0008417508417508417,
+    "total_input_tokens": 552612,
+    "total_output_tokens": 11145
+  },
+  "Claude_Rational": {
+    "total_calls": 1391,
+    "parse_failures": 0,
+    "api_failures": 0,
+    "unparseable_responses": 0,
+    "parse_failure_rate": 0.0,
+    "total_input_tokens": 683555,
+    "total_output_tokens": 15276
+  },
+  "GPT_Coop": {
+    "total_calls": 1465,
+    "parse_failures": 1,
+    "api_failures": 0,
+    "unparseable_responses": 1,
+    "parse_failure_rate": 0.0006825938566552901,
+    "total_input_tokens": 732527,
+    "total_output_tokens": 4242
+  },
+  "GPT_Neutral": {
+    "total_calls": 1663,
+    "parse_failures": 0,
+    "api_failures": 0,
+    "unparseable_responses": 0,
+    "parse_failure_rate": 0.0,
+    "total_input_tokens": 802106,
+    "total_output_tokens": 4566
+  },
+  "GPT_Rational": {
+    "total_calls": 1431,
+    "parse_failures": 0,
+    "api_failures": 0,
+    "unparseable_responses": 0,
+    "parse_failure_rate": 0.0,
+    "total_input_tokens": 692471,
+    "total_output_tokens": 4050
+  }
+}

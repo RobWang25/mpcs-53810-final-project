@@ -1,0 +1,96 @@
+{
+  "label": "real_llm",
+  "strategy_names": [
+    "TitForTat",
+    "AlwaysDefect",
+    "AlwaysCooperate",
+    "Pavlov",
+    "GrimTrigger",
+    "GenerousTFT",
+    "Claude_Neutral",
+    "Claude_Rational",
+    "Claude_Coop",
+    "GPT_Neutral",
+    "GPT_Rational",
+    "GPT_Coop"
+  ],
+  "ranking": [
+    [
+      "GrimTrigger",
+      2.8184718331777154
+    ],
+    [
+      "Claude_Neutral",
+      2.815782828282828
+    ],
+    [
+      "Claude_Rational",
+      2.811752136752137
+    ],
+    [
+      "GPT_Neutral",
+      2.810648148148148
+    ],
+    [
+      "GenerousTFT",
+      2.8085317460317456
+    ],
+    [
+      "GPT_Coop",
+      2.8060185185185187
+    ],
+    [
+      "Pavlov",
+      2.7916666666666665
+    ],
+    [
+      "Claude_Coop",
+      2.791111111111111
+    ],
+    [
+      "TitForTat",
+      2.7900326797385624
+    ],
+    [
+      "GPT_Rational",
+      2.7738095238095237
+    ],
+    [
+      "AlwaysCooperate",
+      2.75
+    ],
+    [
+      "AlwaysDefect",
+      2.5641460229179525
+    ]
+  ],
+  "final_distribution": {
+    "TitForTat": 0.08836956271461449,
+    "AlwaysDefect": -1.432232671780946e-13,
+    "AlwaysCooperate": 0.07632050617982886,
+    "Pavlov": 0.08889987041872026,
+    "GrimTrigger": 0.09806808737485774,
+    "GenerousTFT": 0.0945628643882531,
+    "Claude_Neutral": 0.09710722639519437,
+    "Claude_Rational": 0.09568454456878718,
+    "Claude_Coop": 0.08871921033574488,
+    "GPT_Neutral": 0.09529852651674962,
+    "GPT_Rational": 0.083272968835061,
+    "GPT_Coop": 0.09369663223844142
+  },
+  "ess_summary": {
+    "TitForTat": true,
+    "AlwaysDefect": true,
+    "AlwaysCooperate": false,
+    "Pavlov": false,
+    "GrimTrigger": true,
+    "GenerousTFT": false,
+    "Claude_Neutral": true,
+    "Claude_Rational": true,
+    "Claude_Coop": false,
+    "GPT_Neutral": true,
+    "GPT_Rational": true,
+    "GPT_Coop": true
+  },
+  "output_dir": "data/smoke_test_v2/real_llm"
+}

@@ -1,0 +1,56 @@
+{
+  "Claude_Coop": {
+    "total_calls": 260,
+    "parse_failures": 0,
+    "api_failures": 0,
+    "unparseable_responses": 0,
+    "parse_failure_rate": 0.0,
+    "total_input_tokens": 129616,
+    "total_output_tokens": 1888
+  },
+  "Claude_Neutral": {
+    "total_calls": 288,
+    "parse_failures": 0,
+    "api_failures": 0,
+    "unparseable_responses": 0,
+    "parse_failure_rate": 0.0,
+    "total_input_tokens": 132032,
+    "total_output_tokens": 2775
+  },
+  "Claude_Rational": {
+    "total_calls": 258,
+    "parse_failures": 0,
+    "api_failures": 0,
+    "unparseable_responses": 0,
+    "parse_failure_rate": 0.0,
+    "total_input_tokens": 122466,
+    "total_output_tokens": 2481
+  },
+  "GPT_Coop": {
+    "total_calls": 285,
+    "parse_failures": 0,
+    "api_failures": 0,
+    "unparseable_responses": 0,
+    "parse_failure_rate": 0.0,
+    "total_input_tokens": 140603,
+    "total_output_tokens": 848
+  },
+  "GPT_Neutral": {
+    "total_calls": 310,
+    "parse_failures": 0,
+    "api_failures": 0,
+    "unparseable_responses": 0,
+    "parse_failure_rate": 0.0,
+    "total_input_tokens": 138217,
+    "total_output_tokens": 848
+  },
+  "GPT_Rational": {
+    "total_calls": 305,
+    "parse_failures": 0,
+    "api_failures": 0,
+    "unparseable_responses": 0,
+    "parse_failure_rate": 0.0,
+    "total_input_tokens": 158583,
+    "total_output_tokens": 880
+  }
+}

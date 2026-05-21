@@ -1,0 +1,614 @@
+{
+  "TitForTat": {
+    "n_resisted": 11,
+    "n_total": 11,
+    "is_global_ess": true,
+    "details": {
+      "AlwaysDefect": {
+        "is_stable": true,
+        "final_invader_share": 4.48313707796964e-06
+      },
+      "AlwaysCooperate": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "Pavlov": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "GrimTrigger": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "GenerousTFT": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "Claude_Neutral": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "Claude_Rational": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "Claude_Coop": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "GPT_Neutral": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GPT_Rational": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GPT_Coop": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999950000001
+      }
+    }
+  },
+  "AlwaysDefect": {
+    "n_resisted": 11,
+    "n_total": 11,
+    "is_global_ess": true,
+    "details": {
+      "TitForTat": {
+        "is_stable": true,
+        "final_invader_share": 6.151499419926242e-07
+      },
+      "AlwaysCooperate": {
+        "is_stable": true,
+        "final_invader_share": 9.999999952139107e-10
+      },
+      "Pavlov": {
+        "is_stable": true,
+        "final_invader_share": 5.04133011414567e-07
+      },
+      "GrimTrigger": {
+        "is_stable": true,
+        "final_invader_share": 4.473396059031893e-06
+      },
+      "GenerousTFT": {
+        "is_stable": true,
+        "final_invader_share": 2.126496725430062e-06
+      },
+      "Claude_Neutral": {
+        "is_stable": true,
+        "final_invader_share": 3.032207718975906e-06
+      },
+      "Claude_Rational": {
+        "is_stable": true,
+        "final_invader_share": 2.7473721991147647e-06
+      },
+      "Claude_Coop": {
+        "is_stable": true,
+        "final_invader_share": 8.592151901606995e-07
+      },
+      "GPT_Neutral": {
+        "is_stable": true,
+        "final_invader_share": 1.9747384691234085e-06
+      },
+      "GPT_Rational": {
+        "is_stable": true,
+        "final_invader_share": 3.3757551049749707e-07
+      },
+      "GPT_Coop": {
+        "is_stable": true,
+        "final_invader_share": 1.518467040221816e-06
+      }
+    }
+  },
+  "AlwaysCooperate": {
+    "n_resisted": 10,
+    "n_total": 11,
+    "is_global_ess": false,
+    "details": {
+      "TitForTat": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "AlwaysDefect": {
+        "is_stable": false,
+        "final_invader_share": 0.9999999889999996
+      },
+      "Pavlov": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "GrimTrigger": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "GenerousTFT": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "Claude_Neutral": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "Claude_Rational": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "Claude_Coop": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "GPT_Neutral": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GPT_Rational": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GPT_Coop": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999950000001
+      }
+    }
+  },
+  "Pavlov": {
+    "n_resisted": 10,
+    "n_total": 11,
+    "is_global_ess": false,
+    "details": {
+      "TitForTat": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "AlwaysDefect": {
+        "is_stable": false,
+        "final_invader_share": 0.9999993262538639
+      },
+      "AlwaysCooperate": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "GrimTrigger": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "GenerousTFT": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "Claude_Neutral": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "Claude_Rational": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "Claude_Coop": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "GPT_Neutral": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GPT_Rational": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GPT_Coop": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999950000001
+      }
+    }
+  },
+  "GrimTrigger": {
+    "n_resisted": 11,
+    "n_total": 11,
+    "is_global_ess": true,
+    "details": {
+      "TitForTat": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "AlwaysDefect": {
+        "is_stable": true,
+        "final_invader_share": 1.276357601610039e-06
+      },
+      "AlwaysCooperate": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "Pavlov": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "GenerousTFT": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "Claude_Neutral": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "Claude_Rational": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "Claude_Coop": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "GPT_Neutral": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GPT_Rational": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GPT_Coop": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999950000001
+      }
+    }
+  },
+  "GenerousTFT": {
+    "n_resisted": 10,
+    "n_total": 11,
+    "is_global_ess": false,
+    "details": {
+      "TitForTat": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "AlwaysDefect": {
+        "is_stable": false,
+        "final_invader_share": 0.9999982083347158
+      },
+      "AlwaysCooperate": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "Pavlov": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GrimTrigger": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "Claude_Neutral": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "Claude_Rational": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "Claude_Coop": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "GPT_Neutral": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GPT_Rational": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GPT_Coop": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999950000001
+      }
+    }
+  },
+  "Claude_Neutral": {
+    "n_resisted": 11,
+    "n_total": 11,
+    "is_global_ess": true,
+    "details": {
+      "TitForTat": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "AlwaysDefect": {
+        "is_stable": true,
+        "final_invader_share": 3.017916352855454e-06
+      },
+      "AlwaysCooperate": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "Pavlov": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "GrimTrigger": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "GenerousTFT": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "Claude_Rational": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "Claude_Coop": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "GPT_Neutral": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GPT_Rational": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GPT_Coop": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999950000001
+      }
+    }
+  },
+  "Claude_Rational": {
+    "n_resisted": 11,
+    "n_total": 11,
+    "is_global_ess": true,
+    "details": {
+      "TitForTat": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "AlwaysDefect": {
+        "is_stable": true,
+        "final_invader_share": 8.740378246488451e-07
+      },
+      "AlwaysCooperate": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "Pavlov": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GrimTrigger": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "GenerousTFT": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "Claude_Neutral": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "Claude_Coop": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "GPT_Neutral": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GPT_Rational": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GPT_Coop": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999950000001
+      }
+    }
+  },
+  "Claude_Coop": {
+    "n_resisted": 10,
+    "n_total": 11,
+    "is_global_ess": false,
+    "details": {
+      "TitForTat": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "AlwaysDefect": {
+        "is_stable": false,
+        "final_invader_share": 0.9999994712314555
+      },
+      "AlwaysCooperate": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "Pavlov": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "GrimTrigger": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GenerousTFT": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "Claude_Neutral": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "Claude_Rational": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999949999999
+      },
+      "GPT_Neutral": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GPT_Rational": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GPT_Coop": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999950000001
+      }
+    }
+  },
+  "GPT_Neutral": {
+    "n_resisted": 11,
+    "n_total": 11,
+    "is_global_ess": true,
+    "details": {
+      "TitForTat": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "AlwaysDefect": {
+        "is_stable": true,
+        "final_invader_share": 7.566884597555994e-07
+      },
+      "AlwaysCooperate": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "Pavlov": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999950000002
+      },
+      "GrimTrigger": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GenerousTFT": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999950000002
+      },
+      "Claude_Neutral": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "Claude_Rational": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999950000002
+      },
+      "Claude_Coop": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GPT_Rational": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GPT_Coop": {
+        "is_stable": true,
+        "final_invader_share": 0.04999999950000001
+      }
+    }
+  },
+  "GPT_Rational": {
+    "n_resisted": 11,
+    "n_total": 11,
+    "is_global_ess": true,
+    "details": {
+      "TitForTat": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "AlwaysDefect": {
+        "is_stable": true,
+        "final_invader_share": 1.782612546798012e-06
+      },
+      "AlwaysCooperate": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "Pavlov": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GrimTrigger": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GenerousTFT": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "Claude_Neutral": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "Claude_Rational": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "Claude_Coop": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GPT_Neutral": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GPT_Coop": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      }
+    }
+  },
+  "GPT_Coop": {
+    "n_resisted": 11,
+    "n_total": 11,
+    "is_global_ess": true,
+    "details": {
+      "TitForTat": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "AlwaysDefect": {
+        "is_stable": true,
+        "final_invader_share": 1.225359630397201e-05
+      },
+      "AlwaysCooperate": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "Pavlov": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GrimTrigger": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GenerousTFT": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "Claude_Neutral": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "Claude_Rational": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "Claude_Coop": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GPT_Neutral": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      },
+      "GPT_Rational": {
+        "is_stable": true,
+        "final_invader_share": 0.0499999995
+      }
+    }
+  }
+}
