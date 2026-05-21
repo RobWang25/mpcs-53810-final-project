@@ -26,6 +26,48 @@ Backed by two well-tested academic libraries:
 Our novel contributions live in our own code (LLM strategies, prompt framings,
 behavioral fingerprint metrics).
 
+## Strategies Used
+
+The default tournament backend uses axelrod-python's canonical classical
+implementations, plus our own wrappers for LLM-backed strategies.
+
+Classical strategies:
+
+- `TitForTat` — cooperate first, then mirror the opponent's previous move
+- `AlwaysDefect` — defect every round
+- `AlwaysCooperate` — cooperate every round
+- `Pavlov` — win-stay, lose-shift
+- `GrimTrigger` — cooperate until the opponent defects once, then defect forever
+- `GenerousTFT` — Tit-for-Tat with occasional forgiveness
+- `Joss` — Tit-for-Tat with occasional random defections
+- `SuspiciousTFT` — Tit-for-Tat that defects on the first move
+- `Tester` — probes the opponent for exploitability
+
+LLM strategies:
+
+- `Claude_Neutral`
+- `Claude_Rational`
+- `Claude_Coop`
+- `GPT_Neutral`
+- `GPT_Rational`
+- `GPT_Coop`
+
+Mock LLM strategies for cost-free testing:
+
+- `MockClaude_Neutral`
+- `MockClaude_Rational`
+- `MockClaude_Coop`
+- `MockGPT_Neutral`
+- `MockGPT_Rational`
+- `MockGPT_Coop`
+
+Run modes use these rosters:
+
+- `classical` — the 9 classical strategies
+- `mock_llm` — the 6 mock LLM strategies
+- `mixed_mock` — classical strategies plus mock LLM strategies
+- `real_llm` — classical strategies plus real Claude/GPT strategies
+
 ## Project Structure
 
 ```
